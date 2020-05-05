@@ -19,24 +19,16 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        Geolocation.getCurrentPosition(
-            ({coords: {latitude, longitude}}) => {
-                this.setState({
-                    region: {
-                        latitude,
-                        longitude,
-                        latitudeDelta: 0.0043,
-                        longitudeDelta: 0.0024,
-                    },
-                });
-            },
-            () => {},
-            {
-                timeout: 20000,
-                enableHighAccuracy: true,
-                maximumAge: 10000,
-            },
-        );
+        Geolocation.getCurrentPosition(({coords: {latitude, longitude}}) => {
+            this.setState({
+                region: {
+                    latitude,
+                    longitude,
+                    latitudeDelta: 0.0043,
+                    longitudeDelta: 0.0024,
+                },
+            });
+        });
     }
 
     render() {
@@ -48,7 +40,7 @@ export default class App extends Component {
                         this.state.region.longitude,
                     ]}
                     style={styles.map}
-                    showUserLocation
+                    showUserLocation={true}
                 />
             </View>
         );
